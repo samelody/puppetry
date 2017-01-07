@@ -23,7 +23,67 @@ package com.samelody.puppetry;
  */
 public final class Puppetry {
 
+    /**
+     * Private constructor.
+     */
     private Puppetry() {
+        throw new UnsupportedOperationException();
+    }
 
+    /**
+     * The passive view.
+     *
+     * @author Belin Wu
+     */
+    public interface PassiveView {
+        /**
+         * Creates the router.
+         *
+         * @return The created router.
+         */
+        Router createRouter();
+    }
+
+    /**
+     * The presenter.
+     *
+     * @author Belin Wu
+     */
+    public interface Presenter {
+        void attachView(PassiveView view, Router router);
+        void reattachView(PassiveView view, Router router);
+        void detachView();
+
+        void create();
+        void start();
+        void resume();
+        void pause();
+        void stop();
+        void destroy();
+
+        PassiveView getView();
+        PresentationModel getModel();
+        Router getRouter();
+    }
+
+    /**
+     * The presentation model.
+     *
+     * @author Belin Wu
+     */
+    public interface PresentationModel {
+
+        /**
+         * Gets the unique id of this model.
+         *
+         * @return The unique id.
+         */
+        long getId();
+    }
+
+    /**
+     * @author Belin Wu
+     */
+    public interface Router {
     }
 }
