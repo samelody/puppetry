@@ -19,15 +19,14 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 
-import com.samelody.puppetry.PresenterFactory;
-import com.samelody.puppetry.PresenterGetter;
+import com.samelody.puppetry.Controller;
 import com.samelody.puppetry.Puppetry.PassiveView;
 import com.samelody.puppetry.Puppetry.Presenter;
 import com.samelody.puppetry.PuppetryDelegate;
 
 public abstract class PassiveActivity<P extends Presenter>
         extends AppCompatActivity
-        implements PassiveView, PresenterFactory<P>, PresenterGetter<P> {
+        implements PassiveView, Controller<P> {
 
     private PuppetryDelegate<P> delegate = new PuppetryDelegate<>();
 

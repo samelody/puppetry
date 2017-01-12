@@ -48,78 +48,104 @@ public abstract class AbstractPresenter
      */
     private R router;
 
-    @Override
     @SuppressWarnings("unchecked")
-    public void attachView(PassiveView view, Router router) {
-
+    void attachView(PassiveView view, Router router) {
         try {
             this.view = (V) view;
         } catch (ClassCastException e) {
-            throw new IllegalArgumentException(e);
+            throw new IllegalStateException(e);
         }
         try {
             this.router = (R) router;
         } catch (ClassCastException e) {
-            throw new IllegalArgumentException(e);
+            throw new IllegalStateException(e);
         }
     }
 
-    @Override
-    public void reattachView(PassiveView view, Router router) {
+    void reattachView(PassiveView view, Router router) {
         attachView(view, router);
     }
 
-    @Override
-    public void detachView() {
+    void detachView() {
         this.view = null;
         this.router = null;
     }
 
-    @Override
-    public void create() {
+    /**
+     * Create the presenter.
+     */
+    void create() {
 
     }
 
-    @Override
-    public void start() {
+    /**
+     * Start the presenter.
+     */
+    void start() {
 
     }
 
-    @Override
-    public void resume() {
+    /**
+     * Resume the presenter.
+     */
+    void resume() {
 
     }
 
-    @Override
-    public void pause() {
+    /**
+     * Pause the presenter.
+     */
+    void pause() {
 
     }
 
-    @Override
-    public void stop() {
+    /**
+     * Stop the presenter.
+     */
+    void stop() {
 
     }
 
-    @Override
-    public void destroy() {
+    /**
+     * Destroy the presenter.
+     */
+    void destroy() {
 
     }
 
-    @Override
-    public V getView() {
+    /**
+     * Gets the passive view.
+     *
+     * @return The passive view.
+     */
+    protected V getView() {
         return view;
     }
 
-    @Override
-    public R getRouter() {
+    /**
+     * Gets the router.
+     *
+     * @return The router.
+     */
+    protected R getRouter() {
         return router;
     }
 
+    /**
+     * Sets the presentation model.
+     *
+     * @param model The presentation model.
+     */
     public void setModel(M model) {
         this.model = model;
     }
 
-    public M getModel() {
+    /**
+     * Gets the presentation model.
+     *
+     * @return The presentation model.
+     */
+    protected M getModel() {
         return model;
     }
 }

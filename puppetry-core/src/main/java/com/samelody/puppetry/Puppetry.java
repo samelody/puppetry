@@ -36,12 +36,6 @@ public final class Puppetry {
      * @author Belin Wu
      */
     public interface PassiveView {
-        /**
-         * Creates the router.
-         *
-         * @return The created router.
-         */
-        Router createRouter();
     }
 
     /**
@@ -50,20 +44,6 @@ public final class Puppetry {
      * @author Belin Wu
      */
     public interface Presenter {
-        void attachView(PassiveView view, Router router);
-        void reattachView(PassiveView view, Router router);
-        void detachView();
-
-        void create();
-        void start();
-        void resume();
-        void pause();
-        void stop();
-        void destroy();
-
-        PassiveView getView();
-        PresentationModel getModel();
-        Router getRouter();
     }
 
     /**

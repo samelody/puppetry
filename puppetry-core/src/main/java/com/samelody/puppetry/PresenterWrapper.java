@@ -15,22 +15,20 @@
 */
 package com.samelody.puppetry;
 
-import com.samelody.puppetry.Puppetry.Presenter;
-
-class PresenterWrapper<P extends Presenter> {
-    private P presenter;
+class PresenterWrapper {
+    private AbstractPresenter presenter;
     private boolean fresh;
 
-    PresenterWrapper(P presenter, boolean fresh) {
+    PresenterWrapper(AbstractPresenter presenter, boolean fresh) {
         this.presenter = presenter;
         this.fresh = fresh;
     }
 
-    void setPresenter(P presenter) {
+    void setPresenter(AbstractPresenter presenter) {
         this.presenter = presenter;
     }
 
-    P getPresenter() {
+    AbstractPresenter getPresenter() {
         return presenter;
     }
 

@@ -31,8 +31,8 @@ import static java.lang.System.currentTimeMillis;
  *
  * @author Belin Wu
  */
-public class PuppetryDelegate<P extends Presenter>
-        implements PresenterGetter<P> {
+public class PuppetryDelegate<P extends Presenter> {
+
     /**
      * Key of presenter id.
      */
@@ -41,7 +41,7 @@ public class PuppetryDelegate<P extends Presenter>
     /**
      * The presenter wrapper.
      */
-    private PresenterWrapper<P> wrapper;
+    private PresenterWrapper wrapper;
 
     /**
      * The presenter id.
@@ -52,7 +52,7 @@ public class PuppetryDelegate<P extends Presenter>
 
     private boolean presenterRemoved;
 
-    public void onViewCreate(PresenterFactory<P> factory, Bundle state) {
+    public void onViewCreate(Controller<P> factory, Bundle state) {
         if (state == null) {
             presenterId = "presenter-" + currentTimeMillis();
         }
@@ -68,17 +68,17 @@ public class PuppetryDelegate<P extends Presenter>
 
     public <V extends PassiveView, R extends Router> void onViewStart(V view, R router) {
         if (wrapper.isFresh()) {
-            getPresenter().attachView(view, router);
+            wrapper.getPresenter().attachView(view, router);
         }
         else {
-            getPresenter().reattachView(view, router);
+            wrapper.getPresenter().reattachView(view, router);
         }
-        getPresenter().start();
+        wrapper.getPresenter().start();
     }
 
     public void onViewStop() {
-        getPresenter().stop();
-        getPresenter().detachView();
+        wrapper.getPresenter().stop();
+        wrapper.getPresenter().detachView();
     }
 
     public void onStateSave(Bundle state) {
@@ -87,11 +87,11 @@ public class PuppetryDelegate<P extends Presenter>
     }
 
     public void onViewResume() {
-        getPresenter().resume();
+        wrapper.getPresenter().resume();
     }
 
     public void onViewPause() {
-        getPresenter().pause();
+        wrapper.getPresenter().pause();
     }
 
     public void onViewDestroy(Fragment fragment) {
@@ -109,9 +109,14 @@ public class PuppetryDelegate<P extends Presenter>
         }
     }
 
-    @Override
+    /**
+     * Gets the presenter.
+     *
+     * @return The presenter.
+     */
+    @SuppressWarnings("unchecked")
     public P getPresenter() {
-        return wrapper.getPresenter();
+        return (P) wrapper.getPresenter();
     }
 
     /**
@@ -122,7 +127,7 @@ public class PuppetryDelegate<P extends Presenter>
             return;
         }
         PresenterManager.getInstance().remove(presenterId);
-        getPresenter().destroy();
+        wrapper.getPresenter().destroy();
         wrapper.setPresenter(null); // null presenter object
         presenterRemoved = true;
     }

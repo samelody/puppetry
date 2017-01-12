@@ -27,7 +27,7 @@ import static com.samelody.stathod.Objects.requireNonNull;
  *
  * @author Belin Wu
  */
-public class PresenterManager {
+class PresenterManager {
     /**
      * The singleton.
      */
@@ -43,7 +43,7 @@ public class PresenterManager {
      *
      * @return The singleton instance.
      */
-    public static PresenterManager getInstance() {
+    static PresenterManager getInstance() {
         return instance;
     }
 
@@ -57,15 +57,19 @@ public class PresenterManager {
     }
 
     @SuppressWarnings("unchecked")
-    <P extends Presenter> PresenterWrapper<P> getPresenter(String id, PresenterFactory<P> factory) {
-        P presenter = (P) presenters.get(id);
-        if (presenter != null) {
-            return new PresenterWrapper<>(presenter, false);
+    <P extends Presenter> PresenterWrapper getPresenter(String id, Controller<P> factory) {
+        P p = (P) presenters.get(id);
+        if (p != null) {
+            return new PresenterWrapper((AbstractPresenter) p, false);
         }
-        presenter = factory.createPresenter();
-        requireNonNull(presenter, "The presenter must not be null.");
-        requireNonNull(presenter.getModel(), "The presentation model must not be null.");
+        p = factory.createPresenter();
+        requireNonNull(p, "Your presenter must not be null.");
+        if (!(p instanceof AbstractPresenter)) {
+            throw new IllegalStateException("Your presenter must be a AbstractPresenter.");
+        }
+        AbstractPresenter presenter = (AbstractPresenter) p;
+        requireNonNull(presenter.getModel(), "Your presentation model must not be null.");
         presenters.put(id, presenter);
-        return new PresenterWrapper<>(presenter, true);
+        return new PresenterWrapper(presenter, true);
     }
 }
