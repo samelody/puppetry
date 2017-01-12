@@ -25,7 +25,7 @@ import static java.lang.System.currentTimeMillis;
  *
  * @author Belin Wu
  */
-public abstract class AbstractModel implements PresentationModel {
+public class PuppetryModel implements PresentationModel {
     /**
      * The unique id of this model.
      */

@@ -60,14 +60,14 @@ class PresenterManager {
     <P extends Presenter> PresenterWrapper getPresenter(String id, Controller<P> factory) {
         P p = (P) presenters.get(id);
         if (p != null) {
-            return new PresenterWrapper((AbstractPresenter) p, false);
+            return new PresenterWrapper((PuppetryPresenter) p, false);
         }
         p = factory.createPresenter();
         requireNonNull(p, "Your presenter must not be null.");
-        if (!(p instanceof AbstractPresenter)) {
-            throw new IllegalStateException("Your presenter must be a AbstractPresenter.");
+        if (!(p instanceof PuppetryPresenter)) {
+            throw new IllegalStateException("Your presenter must be a PuppetryPresenter.");
         }
-        AbstractPresenter presenter = (AbstractPresenter) p;
+        PuppetryPresenter presenter = (PuppetryPresenter) p;
         requireNonNull(presenter.getModel(), "Your presentation model must not be null.");
         presenters.put(id, presenter);
         return new PresenterWrapper(presenter, true);

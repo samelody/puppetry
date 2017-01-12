@@ -15,7 +15,7 @@
 */
 package com.samelody.puppetry.sample.module.main;
 
-import com.samelody.puppetry.AbstractPresenter;
+import com.samelody.puppetry.PuppetryPresenter;
 import com.samelody.puppetry.sample.module.main.MainPuppetry.PassiveView;
 import com.samelody.puppetry.sample.module.main.MainPuppetry.Presenter;
 import com.samelody.puppetry.sample.route.SampleRouter;
@@ -24,7 +24,7 @@ import com.samelody.puppetry.sample.route.SampleRouter;
  * @author Belin Wu
  */
 public class MainPresenter
-        extends AbstractPresenter<PassiveView, MainModel, SampleRouter>
+        extends PuppetryPresenter<PassiveView, MainModel, SampleRouter>
         implements Presenter {
 
     @Override

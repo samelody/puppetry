@@ -15,10 +15,10 @@
 */
 package com.samelody.puppetry.sample.module.main;
 
-import com.samelody.puppetry.AbstractModel;
+import com.samelody.puppetry.PuppetryModel;
 
 /**
  * @author Belin Wu
  */
-public class MainModel extends AbstractModel {
+public class MainModel extends PuppetryModel {
 }

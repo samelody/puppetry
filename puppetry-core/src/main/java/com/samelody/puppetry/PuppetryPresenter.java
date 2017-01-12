@@ -29,7 +29,7 @@ import com.samelody.puppetry.Puppetry.Router;
  * @param <V> The type of the passive view.
  * @param <M> The type of the presentation model.
  */
-public abstract class AbstractPresenter
+public class PuppetryPresenter
         <V extends PassiveView, M extends PresentationModel, R extends Router>
         implements Presenter {
 
