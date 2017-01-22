@@ -52,7 +52,7 @@ public class PuppetryDelegate<P extends Presenter> {
 
     private boolean presenterRemoved;
 
-    public void onViewCreate(Controller<P> factory, Bundle state) {
+    public void onViewCreate(ViewController<P> factory, Bundle state) {
         if (state == null) {
             presenterId = "presenter-" + currentTimeMillis();
         }

@@ -57,7 +57,7 @@ class PresenterManager {
     }
 
     @SuppressWarnings("unchecked")
-    <P extends Presenter> PresenterWrapper getPresenter(String id, Controller<P> factory) {
+    <P extends Presenter> PresenterWrapper getPresenter(String id, ViewController<P> factory) {
         P p = (P) presenters.get(id);
         if (p != null) {
             return new PresenterWrapper((PuppetryPresenter) p, false);

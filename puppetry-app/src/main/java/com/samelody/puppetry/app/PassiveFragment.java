@@ -21,7 +21,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
 import android.view.View;
 
-import com.samelody.puppetry.Controller;
+import com.samelody.puppetry.ViewController;
 import com.samelody.puppetry.Puppetry.PassiveView;
 import com.samelody.puppetry.Puppetry.Presenter;
 import com.samelody.puppetry.PuppetryDelegate;
@@ -31,7 +31,7 @@ import com.samelody.puppetry.PuppetryDelegate;
  */
 public abstract class PassiveFragment<P extends Presenter>
         extends DialogFragment
-        implements PassiveView, Controller<P> {
+        implements PassiveView, ViewController<P> {
 
     /**
      * The puppetry delegate.

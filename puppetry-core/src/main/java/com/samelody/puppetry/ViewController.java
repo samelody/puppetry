@@ -27,11 +27,12 @@ import com.samelody.puppetry.Puppetry.Presenter;
 import com.samelody.puppetry.Puppetry.Router;
 
 /**
+ * Represents the controller of Android views.
  *
  * @author Belin Wu
  * @param <P> The type of the presenter.
  */
-public interface Controller<P extends Presenter> {
+public interface ViewController<P extends Presenter> {
 
     /**
      * Creates the router.
