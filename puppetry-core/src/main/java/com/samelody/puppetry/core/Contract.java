@@ -14,28 +14,21 @@
  * limitations under the License.
 */
 
-package com.samelody.puppetry;
+package com.samelody.puppetry.core;
 
 /**
  *
  *
  * @author Belin Wu
  */
-public final class Puppetry {
-
-    /**
-     * Private constructor.
-     */
-    private Puppetry() {
-        throw new UnsupportedOperationException();
-    }
+public interface Contract {
 
     /**
      * The passive view.
      *
      * @author Belin Wu
      */
-    public interface PassiveView {
+    interface PassiveView {
     }
 
     /**
@@ -43,7 +36,7 @@ public final class Puppetry {
      *
      * @author Belin Wu
      */
-    public interface Presenter {
+    interface Presenter {
     }
 
     /**
@@ -51,7 +44,7 @@ public final class Puppetry {
      *
      * @author Belin Wu
      */
-    public interface PresentationModel {
+    interface PresentationModel {
 
         /**
          * Gets the unique id of this model.
@@ -64,6 +57,6 @@ public final class Puppetry {
     /**
      * @author Belin Wu
      */
-    public interface Router {
+    interface Router {
     }
 }

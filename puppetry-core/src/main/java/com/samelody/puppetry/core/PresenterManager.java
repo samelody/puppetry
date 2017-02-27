@@ -13,11 +13,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
 */
-package com.samelody.puppetry;
+package com.samelody.puppetry.core;
 
 import android.support.v4.util.ArrayMap;
-
-import com.samelody.puppetry.Puppetry.Presenter;
 
 import java.util.Map;
 
@@ -36,7 +34,7 @@ class PresenterManager {
     /**
      * The managed presenters.
      */
-    private Map<String, Presenter> presenters = new ArrayMap<>();
+    private Map<String, Contract.Presenter> presenters = new ArrayMap<>();
 
     /**
      * Gets the singleton instance.
@@ -57,7 +55,7 @@ class PresenterManager {
     }
 
     @SuppressWarnings("unchecked")
-    <P extends Presenter> PresenterWrapper getPresenter(String id, ViewController<P> factory) {
+    <P extends Contract.Presenter> PresenterWrapper getPresenter(String id, ViewController<P> factory) {
         P p = (P) presenters.get(id);
         if (p != null) {
             return new PresenterWrapper((PuppetryPresenter) p, false);

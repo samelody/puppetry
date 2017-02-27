@@ -36,7 +36,7 @@ public class Sample extends Application {
     public void onCreate() {
         super.onCreate();
         instance = this;
-        refWatcher =LeakCanary.install(this);
+        refWatcher = LeakCanary.install(this);
     }
 
     public static Sample getInstance() {

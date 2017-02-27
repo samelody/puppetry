@@ -13,26 +13,23 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
 */
+package com.samelody.puppetry.sample.module.main;
 
-package com.samelody.puppetry;
-
-import com.samelody.puppetry.Puppetry.PresentationModel;
-
-import static java.lang.System.currentTimeMillis;
+import com.samelody.puppetry.core.Contract;
 
 /**
- * This class provides a skeletal implementation of the {@link PresentationModel}.
- *
  * @author Belin Wu
  */
-public class PuppetryModel implements PresentationModel {
-    /**
-     * The unique id of this model.
-     */
-    private long id = currentTimeMillis();
+public interface MainContract {
 
-    @Override
-    public long getId() {
-        return id;
+    interface PassiveView extends Contract.PassiveView {
+        void setHiClickable(boolean clickable);
+        void toastHi();
+    }
+
+    interface Presenter extends Contract.Presenter {
+        void onHiClick();
+
+        void onExitClick();
     }
 }

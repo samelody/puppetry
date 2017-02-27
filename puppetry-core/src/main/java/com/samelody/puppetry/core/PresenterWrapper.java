@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2016 Samelody.
+ * Copyright (c) 2017 Samelody.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,23 +13,26 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
 */
-package com.samelody.puppetry.sample.module.main;
+package com.samelody.puppetry.core;
 
-import com.samelody.puppetry.Puppetry;
+class PresenterWrapper {
+    private PuppetryPresenter presenter;
+    private boolean fresh;
 
-/**
- * @author Belin Wu
- */
-public interface MainPuppetry {
-
-    interface PassiveView extends Puppetry.PassiveView {
-        void setHiClickable(boolean clickable);
-        void toastHi();
+    PresenterWrapper(PuppetryPresenter presenter, boolean fresh) {
+        this.presenter = presenter;
+        this.fresh = fresh;
     }
 
-    interface Presenter extends Puppetry.Presenter {
-        void onHiClick();
+    void setPresenter(PuppetryPresenter presenter) {
+        this.presenter = presenter;
+    }
 
-        void onExitClick();
+    PuppetryPresenter getPresenter() {
+        return presenter;
+    }
+
+    boolean isFresh() {
+        return fresh;
     }
 }

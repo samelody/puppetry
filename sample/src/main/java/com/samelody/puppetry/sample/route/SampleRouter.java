@@ -15,11 +15,11 @@
 */
 package com.samelody.puppetry.sample.route;
 
-import com.samelody.puppetry.Puppetry;
+import com.samelody.puppetry.core.Contract;
 
 /**
  * @author Belin Wu
  */
-public interface SampleRouter extends Puppetry.Router {
+public interface SampleRouter extends Contract.Router {
     void exit();
 }

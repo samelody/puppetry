@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2017 Samelody.
+ * Copyright (c) 2016 Samelody.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,26 +13,26 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
 */
-package com.samelody.puppetry;
 
-class PresenterWrapper {
-    private PuppetryPresenter presenter;
-    private boolean fresh;
+package com.samelody.puppetry.core;
 
-    PresenterWrapper(PuppetryPresenter presenter, boolean fresh) {
-        this.presenter = presenter;
-        this.fresh = fresh;
-    }
+import com.samelody.puppetry.core.Contract.PresentationModel;
 
-    void setPresenter(PuppetryPresenter presenter) {
-        this.presenter = presenter;
-    }
+import static java.lang.System.currentTimeMillis;
 
-    PuppetryPresenter getPresenter() {
-        return presenter;
-    }
+/**
+ * This class provides a skeletal implementation of the {@link PresentationModel}.
+ *
+ * @author Belin Wu
+ */
+public class PuppetryModel implements PresentationModel {
+    /**
+     * The unique id of this model.
+     */
+    private long id = currentTimeMillis();
 
-    boolean isFresh() {
-        return fresh;
+    @Override
+    public long getId() {
+        return id;
     }
 }

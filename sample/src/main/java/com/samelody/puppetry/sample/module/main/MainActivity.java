@@ -21,15 +21,15 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
-import com.samelody.puppetry.Puppetry;
+import com.samelody.puppetry.core.Contract;
 import com.samelody.puppetry.app.PassiveActivity;
 import com.samelody.puppetry.sample.R;
-import com.samelody.puppetry.sample.module.main.MainPuppetry.Presenter;
+import com.samelody.puppetry.sample.module.main.MainContract.Presenter;
 import com.samelody.puppetry.sample.route.SampleRouterImpl;
 
 public class MainActivity
         extends PassiveActivity<Presenter>
-        implements MainPuppetry.PassiveView {
+        implements MainContract.PassiveView {
 
     private Button hi;
     private Button exit;
@@ -55,7 +55,7 @@ public class MainActivity
     }
 
     @Override
-    public Puppetry.Router createRouter() {
+    public Contract.Router createRouter() {
         return new SampleRouterImpl(this);
     }
 

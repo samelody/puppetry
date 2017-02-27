@@ -14,12 +14,12 @@
  * limitations under the License.
 */
 
-package com.samelody.puppetry;
+package com.samelody.puppetry.core;
 
-import com.samelody.puppetry.Puppetry.PassiveView;
-import com.samelody.puppetry.Puppetry.PresentationModel;
-import com.samelody.puppetry.Puppetry.Presenter;
-import com.samelody.puppetry.Puppetry.Router;
+import com.samelody.puppetry.core.Contract.PassiveView;
+import com.samelody.puppetry.core.Contract.PresentationModel;
+import com.samelody.puppetry.core.Contract.Presenter;
+import com.samelody.puppetry.core.Contract.Router;
 
 /**
  * This class provides a skeletal implementation of the {@link Presenter}.

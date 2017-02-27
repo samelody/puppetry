@@ -21,10 +21,10 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
 import android.view.View;
 
-import com.samelody.puppetry.ViewController;
-import com.samelody.puppetry.Puppetry.PassiveView;
-import com.samelody.puppetry.Puppetry.Presenter;
-import com.samelody.puppetry.PuppetryDelegate;
+import com.samelody.puppetry.core.ViewController;
+import com.samelody.puppetry.core.Contract.PassiveView;
+import com.samelody.puppetry.core.Contract.Presenter;
+import com.samelody.puppetry.core.PuppetryDelegate;
 
 /**
  * @author Belin Wu
