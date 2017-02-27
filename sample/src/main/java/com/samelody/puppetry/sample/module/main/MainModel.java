@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2016 Samelody.
+ * Copyright (c) 2016-present Samelody.com
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,10 +15,10 @@
 */
 package com.samelody.puppetry.sample.module.main;
 
-import com.samelody.puppetry.core.PuppetryModel;
+import com.samelody.puppetry.core.Model;
 
 /**
  * @author Belin Wu
  */
-public class MainModel extends PuppetryModel {
+public class MainModel extends Model {
 }

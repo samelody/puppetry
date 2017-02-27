@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2017 Samelody.
+ * Copyright (c) 2017-present Samelody.com
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,6 +19,7 @@ import android.support.v4.util.ArrayMap;
 
 import java.util.Map;
 
+import static com.samelody.puppetry.core.Model.VOID_MODEL;
 import static com.samelody.stathod.Objects.requireNonNull;
 
 /**
@@ -58,15 +59,17 @@ class PresenterManager {
     <P extends Contract.Presenter> PresenterWrapper getPresenter(String id, ViewController<P> factory) {
         P p = (P) presenters.get(id);
         if (p != null) {
-            return new PresenterWrapper((PuppetryPresenter) p, false);
+            return new PresenterWrapper((AbstractPresenter) p, false);
         }
         p = factory.createPresenter();
         requireNonNull(p, "Your presenter must not be null.");
-        if (!(p instanceof PuppetryPresenter)) {
-            throw new IllegalStateException("Your presenter must be a PuppetryPresenter.");
+        if (!(p instanceof AbstractPresenter)) {
+            throw new IllegalStateException("Your presenter must be a AbstractPresenter.");
         }
-        PuppetryPresenter presenter = (PuppetryPresenter) p;
-        requireNonNull(presenter.getModel(), "Your presentation model must not be null.");
+        AbstractPresenter presenter = (AbstractPresenter) p;
+        if (presenter.getModel() == null) {
+            presenter.setModel(VOID_MODEL);
+        }
         presenters.put(id, presenter);
         return new PresenterWrapper(presenter, true);
     }

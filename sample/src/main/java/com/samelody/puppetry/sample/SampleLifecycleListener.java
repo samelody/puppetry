@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2016 Samelody.
+ * Copyright (c) 2017-present Samelody.com
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,26 +13,26 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
 */
+package com.samelody.puppetry.sample;
 
-package com.samelody.puppetry.core;
+import android.app.Activity;
+import android.os.Bundle;
+import android.util.Log;
 
-import com.samelody.puppetry.core.Contract.PresentationModel;
-
-import static java.lang.System.currentTimeMillis;
+import com.samelody.puppetry.core.Contract;
+import com.samelody.puppetry.lifecycle.LifecycleListenerAdapter;
 
 /**
- * This class provides a skeletal implementation of the {@link PresentationModel}.
- *
  * @author Belin Wu
  */
-public class PuppetryModel implements PresentationModel {
-    /**
-     * The unique id of this model.
-     */
-    private long id = currentTimeMillis();
+public class SampleLifecycleListener extends LifecycleListenerAdapter {
+    @Override
+    public void onActivityCreated(Activity activity, Bundle savedInstanceState) {
+        Log.d("Sample", "onActivityCreated");
+    }
 
     @Override
-    public long getId() {
-        return id;
+    public void onPresenterStarted(Contract.Presenter presenter) {
+        Log.d("Sample", "onPresenterStarted");
     }
 }

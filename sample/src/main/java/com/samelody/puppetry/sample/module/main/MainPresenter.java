@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2016 Samelody.
+ * Copyright (c) 2016-present Samelody.com
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,17 +15,16 @@
 */
 package com.samelody.puppetry.sample.module.main;
 
-import com.samelody.puppetry.core.PuppetryPresenter;
+import com.samelody.puppetry.lifecycle.LifecyclePresenter;
 import com.samelody.puppetry.sample.module.main.MainContract.PassiveView;
-import com.samelody.puppetry.sample.module.main.MainContract.Presenter;
 import com.samelody.puppetry.sample.route.SampleRouter;
 
 /**
  * @author Belin Wu
  */
 public class MainPresenter
-        extends PuppetryPresenter<PassiveView, MainModel, SampleRouter>
-        implements Presenter {
+        extends LifecyclePresenter<PassiveView, MainModel, SampleRouter>
+        implements MainContract.Presenter {
 
     @Override
     public void onHiClick() {

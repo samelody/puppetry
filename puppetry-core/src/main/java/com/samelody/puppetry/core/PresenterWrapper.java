@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2017 Samelody.
+ * Copyright (c) 2017-present Samelody.com
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,19 +16,19 @@
 package com.samelody.puppetry.core;
 
 class PresenterWrapper {
-    private PuppetryPresenter presenter;
+    private AbstractPresenter presenter;
     private boolean fresh;
 
-    PresenterWrapper(PuppetryPresenter presenter, boolean fresh) {
+    PresenterWrapper(AbstractPresenter presenter, boolean fresh) {
         this.presenter = presenter;
         this.fresh = fresh;
     }
 
-    void setPresenter(PuppetryPresenter presenter) {
+    void setPresenter(AbstractPresenter presenter) {
         this.presenter = presenter;
     }
 
-    PuppetryPresenter getPresenter() {
+    AbstractPresenter getPresenter() {
         return presenter;
     }
 

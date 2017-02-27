@@ -15,16 +15,21 @@
 */
 package com.samelody.stathod;
 
+import android.annotation.SuppressLint;
+import android.content.Context;
+
 /**
- * Utilities for resources.
- *
  * @author Belin Wu
  */
-public final class Resources {
+public final class Contexts {
+    @SuppressLint("StaticFieldLeak")
+    private static Context appContext;
 
-    /**
-     * Private constructor.
-     */
-    private Resources() {
+    public static void setAppContext(Context context) {
+        appContext = context.getApplicationContext();
+    }
+
+    public static Context getAppContext() {
+        return appContext;
     }
 }

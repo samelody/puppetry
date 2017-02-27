@@ -17,70 +17,50 @@ package com.samelody.puppetry.app;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.app.AppCompatActivity;
 
-import com.samelody.puppetry.core.Contract.PassiveView;
-import com.samelody.puppetry.core.Contract.Presenter;
-import com.samelody.puppetry.core.PresenterDelegate;
-import com.samelody.puppetry.core.ViewController;
+import static com.samelody.puppetry.lifecycle.LifecycleManager.getLifecycleListener;
 
 /**
- * The passive activity.
+ * Non-passive activity.
  *
- * @param <P> The type of the presenter
  * @author Belin Wu
  */
-public abstract class PassiveActivity<P extends Presenter>
-        extends PositiveActivity
-        implements PassiveView, ViewController<P> {
-    /**
-     * The presenter delegate.
-     */
-    private PresenterDelegate<P> delegate = new PresenterDelegate<>();
+public class PositiveActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        delegate.onViewCreate(this, savedInstanceState);
+        getLifecycleListener().onActivityCreated(this, savedInstanceState);
     }
 
     @Override
     protected void onStart() {
         super.onStart();
-        delegate.onViewStart(this, createRouter());
+        getLifecycleListener().onActivityStarted(this);
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        delegate.onViewResume(true);
+        getLifecycleListener().onActivityResumed(this);
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-        delegate.onViewPause();
+        getLifecycleListener().onActivityPaused(this);
     }
 
     @Override
     protected void onStop() {
         super.onStop();
-        delegate.onViewStop();
-    }
-
-    @Override
-    protected void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
-        delegate.onSaveState(outState);
+        getLifecycleListener().onActivityStopped(this);
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        delegate.onViewDestroy(this);
-    }
-
-    @Override
-    public P getPresenter() {
-        return delegate.getPresenter();
+        getLifecycleListener().onActivityDestroyed(this);
     }
 }

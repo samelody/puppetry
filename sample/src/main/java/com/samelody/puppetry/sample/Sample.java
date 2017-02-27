@@ -25,6 +25,8 @@ package com.samelody.puppetry.sample;
 
 import android.app.Application;
 
+import com.samelody.puppetry.lifecycle.LifecycleManager;
+import com.samelody.stathod.Contexts;
 import com.squareup.leakcanary.LeakCanary;
 import com.squareup.leakcanary.RefWatcher;
 
@@ -32,10 +34,15 @@ public class Sample extends Application {
     private RefWatcher refWatcher;
     private static Sample instance;
 
+    {
+        LifecycleManager.getInstance().setLifecycleListener(new SampleLifecycleListener());
+    }
+
     @Override
     public void onCreate() {
         super.onCreate();
         instance = this;
+        Contexts.setAppContext(this);
         refWatcher = LeakCanary.install(this);
     }
 

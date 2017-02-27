@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2016 Samelody.
+ * Copyright (c) 2016-present Samelody.com
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,20 +18,19 @@ package com.samelody.puppetry.core;
 
 import com.samelody.puppetry.core.Contract.PassiveView;
 import com.samelody.puppetry.core.Contract.PresentationModel;
-import com.samelody.puppetry.core.Contract.Presenter;
 import com.samelody.puppetry.core.Contract.Router;
 
 /**
- * This class provides a skeletal implementation of the {@link Presenter}.
+ * This class provides a skeletal implementation of the {@link Contract.Presenter}.
  *
  * @author Belin Wu
  *
  * @param <V> The type of the passive view.
  * @param <M> The type of the presentation model.
  */
-public class PuppetryPresenter
+public abstract class AbstractPresenter
         <V extends PassiveView, M extends PresentationModel, R extends Router>
-        implements Presenter {
+        implements Contract.Presenter {
 
     /**
      * The passive view.
@@ -74,42 +73,44 @@ public class PuppetryPresenter
     /**
      * Create the presenter.
      */
-    void create() {
+    protected void create() {
 
     }
 
     /**
      * Start the presenter.
      */
-    void start() {
+    protected void start() {
 
     }
 
     /**
      * Resume the presenter.
+     *
+     * @param isVisibleToUser
      */
-    void resume() {
+    protected void resume(boolean isVisibleToUser) {
 
     }
 
     /**
      * Pause the presenter.
      */
-    void pause() {
+    protected void pause() {
 
     }
 
     /**
      * Stop the presenter.
      */
-    void stop() {
+    protected void stop() {
 
     }
 
     /**
      * Destroy the presenter.
      */
-    void destroy() {
+    protected void destroy() {
 
     }
 

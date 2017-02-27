@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2017 Samelody.
+ * Copyright (c) 2017-present Samelody.com
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -26,6 +26,7 @@ import com.samelody.puppetry.app.PassiveActivity;
 import com.samelody.puppetry.sample.R;
 import com.samelody.puppetry.sample.module.main.MainContract.Presenter;
 import com.samelody.puppetry.sample.route.SampleRouterImpl;
+import com.samelody.stathod.Contexts;
 
 public class MainActivity
         extends PassiveActivity<Presenter>
@@ -66,7 +67,7 @@ public class MainActivity
 
     @Override
     public void toastHi() {
-        Toast.makeText(this, "Hello world!", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "Hello world!" + Contexts.getAppContext(), Toast.LENGTH_SHORT).show();
     }
 
     @Override

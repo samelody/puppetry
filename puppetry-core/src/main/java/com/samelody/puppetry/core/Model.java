@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2017-present Samelody.com
+ * Copyright (c) 2016-present Samelody.com
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,18 +13,29 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
 */
-package com.samelody.stathod;
+
+package com.samelody.puppetry.core;
+
+import com.samelody.puppetry.core.Contract.PresentationModel;
+
+import static java.lang.System.currentTimeMillis;
 
 /**
- * Utilities for resources.
+ * This class provides a skeletal implementation of the {@link PresentationModel}.
  *
  * @author Belin Wu
  */
-public final class Resources {
+public class Model implements PresentationModel {
+
+    public static final Model VOID_MODEL = new Model();
 
     /**
-     * Private constructor.
+     * The unique id of this model.
      */
-    private Resources() {
+    private long id = currentTimeMillis();
+
+    @Override
+    public long getId() {
+        return id;
     }
 }

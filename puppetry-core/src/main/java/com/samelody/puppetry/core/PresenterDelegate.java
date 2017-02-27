@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2016 Samelody.
+ * Copyright (c) 2016-present Samelody.com
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -27,16 +27,21 @@ import com.samelody.puppetry.core.Contract.Router;
 import static java.lang.System.currentTimeMillis;
 
 /**
- * The delegation of the puppetry.
+ * The delegation of the presenter.
  *
  * @author Belin Wu
  */
-public class PuppetryDelegate<P extends Presenter> {
+public class PresenterDelegate<P extends Presenter> {
 
     /**
      * Key of presenter id.
      */
     private static final String KEY_PRESENTER_ID = "puppetry_presenter_id";
+
+    /**
+     * The prefix of the presenter id.
+     */
+    private static final String PRESENTER_ID_PREFIX = "presenter-";
 
     /**
      * The presenter wrapper.
@@ -48,26 +53,30 @@ public class PuppetryDelegate<P extends Presenter> {
      */
     private String presenterId;
 
-    private boolean stateSaveCalled;
+    private boolean saveStateCalled;
 
     private boolean presenterRemoved;
 
     public void onViewCreate(ViewController<P> factory, Bundle state) {
         if (state == null) {
-            presenterId = "presenter-" + currentTimeMillis();
+            presenterId = PRESENTER_ID_PREFIX + currentTimeMillis();
         }
         else {
             presenterId = state.getString(KEY_PRESENTER_ID);
-            stateSaveCalled = false;
+            saveStateCalled = false;
         }
         wrapper = PresenterManager.getInstance().getPresenter(presenterId, factory);
-        if (wrapper.isFresh()) {
+        if (isFresh()) {
             wrapper.getPresenter().create();
         }
     }
 
+    protected boolean isFresh() {
+        return wrapper.isFresh();
+    }
+
     public <V extends PassiveView, R extends Router> void onViewStart(V view, R router) {
-        if (wrapper.isFresh()) {
+        if (isFresh()) {
             wrapper.getPresenter().attachView(view, router);
         }
         else {
@@ -81,13 +90,13 @@ public class PuppetryDelegate<P extends Presenter> {
         wrapper.getPresenter().detachView();
     }
 
-    public void onStateSave(Bundle state) {
+    public void onSaveState(Bundle state) {
         state.putString(KEY_PRESENTER_ID, presenterId);
-        stateSaveCalled = true;
+        saveStateCalled = true;
     }
 
-    public void onViewResume() {
-        wrapper.getPresenter().resume();
+    public void onViewResume(boolean isVisibleToUser) {
+        wrapper.getPresenter().resume(isVisibleToUser);
     }
 
     public void onViewPause() {
@@ -98,7 +107,7 @@ public class PuppetryDelegate<P extends Presenter> {
         if (fragment.getActivity().isFinishing()) {
             removePresenter();
         }
-        else if (fragment.isRemoving() && !stateSaveCalled) {
+        else if (fragment.isRemoving() && !saveStateCalled) {
             removePresenter();
         }
     }
@@ -107,6 +116,10 @@ public class PuppetryDelegate<P extends Presenter> {
         if (activity.isFinishing()) {
             removePresenter();
         }
+    }
+
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+
     }
 
     /**
