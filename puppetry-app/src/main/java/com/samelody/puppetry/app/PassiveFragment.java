@@ -24,9 +24,9 @@ import android.view.View;
 import com.samelody.puppetry.core.Contract.PassiveView;
 import com.samelody.puppetry.core.Contract.Presenter;
 import com.samelody.puppetry.core.PresenterDelegate;
-import com.samelody.puppetry.core.ViewController;
-
-import static com.samelody.puppetry.lifecycle.LifecycleManager.getLifecycleListener;
+import com.samelody.puppetry.lifecycle.FragmentLifecycle;
+import com.samelody.puppetry.lifecycle.LifecycleController;
+import com.samelody.puppetry.lifecycle.LifecycleManager;
 
 /**
  * The passive fragment.
@@ -35,59 +35,77 @@ import static com.samelody.puppetry.lifecycle.LifecycleManager.getLifecycleListe
  */
 public abstract class PassiveFragment<P extends Presenter>
         extends DialogFragment
-        implements PassiveView, ViewController<P> {
+        implements PassiveView, LifecycleController<FragmentLifecycle, P> {
 
     /**
      * The presenter delegate.
      */
     private PresenterDelegate<P> delegate = new PresenterDelegate<>();
 
+    /**
+     * The lifecycle of this controller.
+     */
+    private FragmentLifecycle lifecycle;
+
+    @Override
+    public void setLifecycle(FragmentLifecycle lifecycle) {
+        this.lifecycle = lifecycle;
+    }
+
+    @Override
+    public FragmentLifecycle getLifecycle() {
+        if (lifecycle == null) {
+            lifecycle = LifecycleManager.getInstance().createFragmentLifecycle();
+        }
+        return lifecycle;
+    }
+
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        getLifecycleListener().onFragmentCreated(this, savedInstanceState);
+        getLifecycle().onFragmentCreate(this, savedInstanceState);
         delegate.onViewCreate(this, savedInstanceState);
     }
 
     @Override
     public void onStart() {
         super.onStart();
-        getLifecycleListener().onFragmentStarted(this);
-        delegate.onViewStart(this, createRouter());
+        getLifecycle().onFragmentStart(this);
+        delegate.onViewStart(this, getRouter());
     }
 
     @Override
     public void onStop() {
         super.onStop();
-        getLifecycleListener().onFragmentStopped(this);
+        getLifecycle().onFragmentStop(this);
         delegate.onViewStop();
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        getLifecycleListener().onFragmentResumed(this, getUserVisibleHint());
+        getLifecycle().onFragmentResume(this, getUserVisibleHint());
         delegate.onViewResume(getUserVisibleHint());
     }
 
     @Override
     public void onPause() {
         super.onPause();
-        getLifecycleListener().onFragmentPaused(this);
+        getLifecycle().onFragmentPause(this);
         delegate.onViewPause();
     }
 
     @Override
     public void onDestroy() {
         super.onDestroy();
-        getLifecycleListener().onFragmentDestroyed(this);
+        getLifecycle().onFragmentDestroy(this);
         delegate.onViewDestroy(this);
     }
 
     @Override
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-        getLifecycleListener().onFragmentStateSaved(this, outState);
+        getLifecycle().onFragmentStateSave(this, outState);
         delegate.onSaveState(outState);
     }
 

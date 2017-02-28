@@ -13,26 +13,22 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
 */
-package com.samelody.puppetry.sample;
-
-import android.app.Activity;
-import android.os.Bundle;
-import android.util.Log;
-
-import com.samelody.puppetry.core.Contract;
-import com.samelody.puppetry.lifecycle.LifecycleListenerAdapter;
+package com.samelody.puppetry.lifecycle;
 
 /**
  * @author Belin Wu
  */
-public class SampleLifecycleListener extends LifecycleListenerAdapter {
-    @Override
-    public void onActivityCreated(Activity activity, Bundle savedInstanceState) {
-        Log.d("Sample", "onActivityCreated");
-    }
+public class PresenterLifecycle {
 
-    @Override
-    public void onPresenterStarted(Contract.Presenter presenter) {
-        Log.d("Sample", "onPresenterStarted");
-    }
+    public void onPresenterCreate(LifecyclePresenter presenter) {}
+
+    public void onPresenterStart(LifecyclePresenter presenter) {}
+
+    public void onPresenterResume(LifecyclePresenter presenter) {}
+
+    public void onPresenterPause(LifecyclePresenter presenter) {}
+
+    public void onPresenterStop(LifecyclePresenter presenter) {}
+
+    public void onPresenterDestroy(LifecyclePresenter presenter) {}
 }

@@ -20,16 +20,23 @@ package com.samelody.puppetry.lifecycle;
  *
  * @author Belin Wu
  */
-public final class LifecycleManager {
+public final class LifecycleManager implements LifecycleFactory {
     /**
      * The singleton.
      */
-    private static final LifecycleManager instance = new LifecycleManager();
+    private static final LifecycleManager INSTANCE = new LifecycleManager();
 
-    /**
-     * The lifecycle listener.
-     */
-    private LifecycleListener lifecycleListener;
+    private static final ActivityLifecycle ACTIVITY_LIFECYCLE = new ActivityLifecycle();
+    private static final FragmentLifecycle FRAGMENT_LIFECYCLE = new FragmentLifecycle();
+    private static final PresenterLifecycle PRESENTER_LIFECYCLE = new PresenterLifecycle();
+
+    private LifecycleFactory factory;
+
+    private LifecycleManager() {}
+
+    public void setFactory(LifecycleFactory factory) {
+        this.factory = factory;
+    }
 
     /**
      * Gets the singleton.
@@ -37,24 +44,33 @@ public final class LifecycleManager {
      * @return The singleton
      */
     public static LifecycleManager getInstance() {
-        return instance;
+        return INSTANCE;
     }
 
-    public void setLifecycleListener(LifecycleListener listener) {
-        this.lifecycleListener = listener;
-    }
-
-    /**
-     * Gets the lifecycle's listener.
-     *
-     * @return The lifecycle listener
-     */
-    public static LifecycleListener getLifecycleListener() {
-        LifecycleListener listener = getInstance().lifecycleListener;
-        if (listener == null) {
-            listener = new LifecycleListenerAdapter();
-            getInstance().setLifecycleListener(listener);
+    @Override
+    public ActivityLifecycle createActivityLifecycle() {
+        if (factory == null) {
+            return ACTIVITY_LIFECYCLE;
         }
-        return listener;
+        ActivityLifecycle lifecycle = factory.createActivityLifecycle();
+        return lifecycle == null ? ACTIVITY_LIFECYCLE : lifecycle;
+    }
+
+    @Override
+    public FragmentLifecycle createFragmentLifecycle() {
+        if (factory == null) {
+            return FRAGMENT_LIFECYCLE;
+        }
+        FragmentLifecycle lifecycle = factory.createFragmentLifecycle();
+        return lifecycle == null ? FRAGMENT_LIFECYCLE : lifecycle;
+    }
+
+    @Override
+    public PresenterLifecycle createPresenterLifecycle() {
+        if (factory == null) {
+            return PRESENTER_LIFECYCLE;
+        }
+        PresenterLifecycle lifecycle = factory.createPresenterLifecycle();
+        return lifecycle == null ? PRESENTER_LIFECYCLE : lifecycle;
     }
 }

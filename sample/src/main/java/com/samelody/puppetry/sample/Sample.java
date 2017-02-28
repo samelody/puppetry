@@ -25,23 +25,49 @@ package com.samelody.puppetry.sample;
 
 import android.app.Application;
 
+import com.samelody.puppetry.lifecycle.ActivityLifecycle;
+import com.samelody.puppetry.lifecycle.FragmentLifecycle;
+import com.samelody.puppetry.lifecycle.LifecycleFactory;
 import com.samelody.puppetry.lifecycle.LifecycleManager;
+import com.samelody.puppetry.lifecycle.PresenterLifecycle;
+import com.samelody.puppetry.sample.lifecycle.SampleActivityLifecycle;
+import com.samelody.puppetry.sample.lifecycle.SamplePresenterLifecycle;
 import com.samelody.stathod.Contexts;
 import com.squareup.leakcanary.LeakCanary;
 import com.squareup.leakcanary.RefWatcher;
+
+import timber.log.Timber;
 
 public class Sample extends Application {
     private RefWatcher refWatcher;
     private static Sample instance;
 
-    {
-        LifecycleManager.getInstance().setLifecycleListener(new SampleLifecycleListener());
+    static {
+        LifecycleManager.getInstance().setFactory(new LifecycleFactory() {
+            @Override
+            public PresenterLifecycle createPresenterLifecycle() {
+                return new SamplePresenterLifecycle();
+            }
+
+            @Override
+            public ActivityLifecycle createActivityLifecycle() {
+                return new SampleActivityLifecycle();
+            }
+
+            @Override
+            public FragmentLifecycle createFragmentLifecycle() {
+                return null;
+            }
+        });
     }
 
     @Override
     public void onCreate() {
         super.onCreate();
         instance = this;
+        if (BuildConfig.DEBUG) {
+            Timber.plant(new Timber.DebugTree());
+        }
         Contexts.setAppContext(this);
         refWatcher = LeakCanary.install(this);
     }

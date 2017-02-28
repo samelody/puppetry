@@ -56,7 +56,7 @@ public class MainActivity
     }
 
     @Override
-    public Contract.Router createRouter() {
+    public Contract.Router getRouter() {
         return new SampleRouterImpl(this);
     }
 

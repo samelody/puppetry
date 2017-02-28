@@ -24,5 +24,6 @@ dependencies {
     debugCompile 'com.squareup.leakcanary:leakcanary-android:1.4'
     releaseCompile 'com.squareup.leakcanary:leakcanary-android-no-op:1.4'
     compile "com.android.support:appcompat-v7:$rootProject.supportLibraryVersion"
+    compile "com.jakewharton.timber:timber:4.5.1"
     testCompile "junit:junit:$rootProject.junitVersion"
 }

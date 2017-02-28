@@ -20,7 +20,6 @@ import android.support.v4.util.ArrayMap;
 import java.util.Map;
 
 import static com.samelody.puppetry.core.Model.VOID_MODEL;
-import static com.samelody.stathod.Objects.requireNonNull;
 
 /**
  *
@@ -56,13 +55,15 @@ class PresenterManager {
     }
 
     @SuppressWarnings("unchecked")
-    <P extends Contract.Presenter> PresenterWrapper getPresenter(String id, ViewController<P> factory) {
+    <P extends Contract.Presenter> PresenterWrapper getPresenter(String id, Controller<P> factory) {
         P p = (P) presenters.get(id);
         if (p != null) {
             return new PresenterWrapper((AbstractPresenter) p, false);
         }
         p = factory.createPresenter();
-        requireNonNull(p, "Your presenter must not be null.");
+        if (p == null) {
+            p = (P) VoidPresenter.getInstance();
+        }
         if (!(p instanceof AbstractPresenter)) {
             throw new IllegalStateException("Your presenter must be a AbstractPresenter.");
         }

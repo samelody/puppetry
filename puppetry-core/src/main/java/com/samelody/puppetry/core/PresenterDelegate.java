@@ -57,7 +57,7 @@ public class PresenterDelegate<P extends Presenter> {
 
     private boolean presenterRemoved;
 
-    public void onViewCreate(ViewController<P> factory, Bundle state) {
+    public void onViewCreate(Controller<P> factory, Bundle state) {
         if (state == null) {
             presenterId = PRESENTER_ID_PREFIX + currentTimeMillis();
         }
@@ -66,17 +66,13 @@ public class PresenterDelegate<P extends Presenter> {
             saveStateCalled = false;
         }
         wrapper = PresenterManager.getInstance().getPresenter(presenterId, factory);
-        if (isFresh()) {
+        if (wrapper.isFresh()) {
             wrapper.getPresenter().create();
         }
     }
 
-    protected boolean isFresh() {
-        return wrapper.isFresh();
-    }
-
     public <V extends PassiveView, R extends Router> void onViewStart(V view, R router) {
-        if (isFresh()) {
+        if (wrapper.isFresh()) {
             wrapper.getPresenter().attachView(view, router);
         }
         else {

@@ -73,46 +73,58 @@ public abstract class AbstractPresenter
     /**
      * Create the presenter.
      */
-    protected void create() {
-
+    void create() {
+        onCreate();
     }
+
+    protected void onCreate() {}
 
     /**
      * Start the presenter.
      */
-    protected void start() {
-
+    void start() {
+        onStart();
     }
+
+    protected void onStart() {}
 
     /**
      * Resume the presenter.
      *
      * @param isVisibleToUser
      */
-    protected void resume(boolean isVisibleToUser) {
-
+    void resume(boolean isVisibleToUser) {
+        onResume();
     }
+
+    protected void onResume() {}
 
     /**
      * Pause the presenter.
      */
-    protected void pause() {
-
+    void pause() {
+        onPause();
     }
+
+    protected void onPause() {}
 
     /**
      * Stop the presenter.
      */
-    protected void stop() {
-
+    void stop() {
+        onStop();
     }
+
+    protected void onStop() {}
 
     /**
      * Destroy the presenter.
      */
-    protected void destroy() {
-
+    void destroy() {
+        onDestroy();
     }
+
+    protected void onDestroy() {}
 
     /**
      * Gets the passive view.
