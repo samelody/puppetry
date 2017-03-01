@@ -1,1 +1,1 @@
-include ':sample', ':puppetry', ':stathod', ':puppetry-app'
+include ':sample', ':puppetry', ':puppetry-app'

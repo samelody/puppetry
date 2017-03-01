@@ -26,7 +26,7 @@ import com.samelody.puppetry.app.PassiveActivity;
 import com.samelody.puppetry.sample.R;
 import com.samelody.puppetry.sample.module.main.MainContract.Presenter;
 import com.samelody.puppetry.sample.route.SampleRouterImpl;
-import com.samelody.stathod.Contexts;
+import com.samelody.stathod.Stathod;
 
 public class MainActivity
         extends PassiveActivity<Presenter>
@@ -67,7 +67,7 @@ public class MainActivity
 
     @Override
     public void toastHi() {
-        Toast.makeText(this, "Hello world!" + Contexts.getAppContext(), Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "Hello world!" + Stathod.getAppContext(), Toast.LENGTH_SHORT).show();
     }
 
     @Override
