@@ -23,17 +23,17 @@ import com.samelody.puppetry.app.PassiveFragment;
  * @author Belin Wu
  */
 public class FragmentLifecycle {
-    public void onFragmentCreate(PassiveFragment fragment, Bundle state) {}
+    public void onCreate(PassiveFragment fragment, Bundle state) {}
 
-    public void onFragmentStart(PassiveFragment fragment) {}
+    public void onStart(PassiveFragment fragment) {}
 
-    public void onFragmentResume(PassiveFragment fragment, boolean visible) {}
+    public void onResume(PassiveFragment fragment, boolean visible) {}
 
-    public void onFragmentPause(PassiveFragment fragment) {}
+    public void onPause(PassiveFragment fragment) {}
 
-    public void onFragmentStop(PassiveFragment fragment) {}
+    public void onStop(PassiveFragment fragment) {}
 
-    public void onFragmentStateSave(PassiveFragment fragment, Bundle state) {}
+    public void onSaveState(PassiveFragment fragment, Bundle state) {}
 
-    public void onFragmentDestroy(PassiveFragment fragment) {}
+    public void onDestroy(PassiveFragment fragment) {}
 }

@@ -16,11 +16,12 @@
 package com.samelody.puppetry.lifecycle;
 
 /**
- * The lifecycle manager of a puppetry application.
+ * The lifecycle manager for creating main components' lifecycle.
  *
  * @author Belin Wu
  */
 public final class LifecycleManager implements LifecycleFactory {
+
     /**
      * The singleton.
      */
@@ -30,10 +31,18 @@ public final class LifecycleManager implements LifecycleFactory {
     private static final FragmentLifecycle FRAGMENT_LIFECYCLE = new FragmentLifecycle();
     private static final PresenterLifecycle PRESENTER_LIFECYCLE = new PresenterLifecycle();
 
+    /**
+     * The lifecycle factory.
+     */
     private LifecycleFactory factory;
 
     private LifecycleManager() {}
 
+    /**
+     * Sets the lifecycle factory.
+     *
+     * @param factory The lifecycle factory
+     */
     public void setFactory(LifecycleFactory factory) {
         this.factory = factory;
     }

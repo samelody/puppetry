@@ -25,7 +25,7 @@ import timber.log.Timber;
  */
 public class SamplePresenterLifecycle extends PresenterLifecycle {
     @Override
-    public void onPresenterCreate(LifecyclePresenter presenter) {
-        Timber.d("onPresenterCreate");
+    public void onCreate(LifecyclePresenter presenter) {
+        Timber.d("onCreate");
     }
 }

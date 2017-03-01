@@ -27,7 +27,7 @@ import timber.log.Timber;
  */
 public class SampleActivityLifecycle extends ActivityLifecycle {
     @Override
-    public void onActivityCreate(PassiveActivity activity, Bundle state) {
-        Timber.d("onActivityCreate");
+    public void onCreate(PassiveActivity activity, Bundle state) {
+        Timber.d("onCreate");
     }
 }

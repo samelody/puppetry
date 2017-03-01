@@ -24,17 +24,17 @@ import com.samelody.puppetry.app.PassiveActivity;
  */
 public class ActivityLifecycle {
 
-    public void onActivityCreate(PassiveActivity activity, Bundle state) {}
+    public void onCreate(PassiveActivity activity, Bundle state) {}
 
-    public void onActivityStart(PassiveActivity activity) {}
+    public void onStart(PassiveActivity activity) {}
 
-    public void onActivityResume(PassiveActivity activity) {}
+    public void onResume(PassiveActivity activity) {}
 
-    public void onActivityPause(PassiveActivity activity) {}
+    public void onPause(PassiveActivity activity) {}
 
-    public void onActivityStop(PassiveActivity activity) {}
+    public void onStop(PassiveActivity activity) {}
 
-    public void onActivityStateSave(PassiveActivity activity, Bundle state) {}
+    public void onSaveState(PassiveActivity activity, Bundle state) {}
 
-    public void onActivityDestroy(PassiveActivity activity) {}
+    public void onDestroy(PassiveActivity activity) {}
 }

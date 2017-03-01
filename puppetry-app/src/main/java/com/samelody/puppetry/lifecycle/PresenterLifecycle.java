@@ -20,15 +20,15 @@ package com.samelody.puppetry.lifecycle;
  */
 public class PresenterLifecycle {
 
-    public void onPresenterCreate(LifecyclePresenter presenter) {}
+    public void onCreate(LifecyclePresenter presenter) {}
 
-    public void onPresenterStart(LifecyclePresenter presenter) {}
+    public void onStart(LifecyclePresenter presenter) {}
 
-    public void onPresenterResume(LifecyclePresenter presenter) {}
+    public void onResume(LifecyclePresenter presenter) {}
 
-    public void onPresenterPause(LifecyclePresenter presenter) {}
+    public void onPause(LifecyclePresenter presenter) {}
 
-    public void onPresenterStop(LifecyclePresenter presenter) {}
+    public void onStop(LifecyclePresenter presenter) {}
 
-    public void onPresenterDestroy(LifecyclePresenter presenter) {}
+    public void onDestroy(LifecyclePresenter presenter) {}
 }

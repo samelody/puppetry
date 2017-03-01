@@ -23,25 +23,34 @@ import com.samelody.puppetry.Contract.PresentationModel;
 import com.samelody.puppetry.Contract.Router;
 
 /**
+ * The base presenter class with lifecycle.
+ *
  * @author Belin Wu
  */
 public abstract class LifecyclePresenter
         <V extends PassiveView, M extends PresentationModel, R extends Router>
-        extends AbstractPresenter<V, M, R>
-        implements LifecycleAware<PresenterLifecycle> {
+        extends AbstractPresenter<V, M, R> {
 
     /**
      * The lifecycle of this presenter.
      */
     private PresenterLifecycle lifecycle;
 
-    @Override
-    public void setLifecycle(PresenterLifecycle lifecycle) {
+    /**
+     * Sets the lifecycle of this presenter.
+     *
+     * @param lifecycle The lifecycle of this presenter.
+     */
+    protected void setLifecycle(PresenterLifecycle lifecycle) {
         this.lifecycle = lifecycle;
     }
 
-    @Override
-    public PresenterLifecycle getLifecycle() {
+    /**
+     * Gets the lifecycle of this presenter.
+     *
+     * @return The lifecycle of this presenter.
+     */
+    private PresenterLifecycle getLifecycle() {
         if (lifecycle == null) {
             lifecycle = LifecycleManager.getInstance().createPresenterLifecycle();
         }
@@ -52,41 +61,41 @@ public abstract class LifecyclePresenter
     @Override
     protected void onCreate() {
         super.onCreate();
-        getLifecycle().onPresenterCreate(this);
+        getLifecycle().onCreate(this);
     }
 
     @CallSuper
     @Override
     protected void onStart() {
         super.onStart();
-        getLifecycle().onPresenterStart(this);
+        getLifecycle().onStart(this);
     }
 
     @CallSuper
     @Override
     protected void onResume() {
         super.onResume();
-        getLifecycle().onPresenterResume(this);
+        getLifecycle().onResume(this);
     }
 
     @CallSuper
     @Override
     protected void onPause() {
         super.onPause();
-        getLifecycle().onPresenterPause(this);
+        getLifecycle().onPause(this);
     }
 
     @CallSuper
     @Override
     protected void onStop() {
         super.onStop();
-        getLifecycle().onPresenterStop(this);
+        getLifecycle().onStop(this);
     }
 
     @CallSuper
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        getLifecycle().onPresenterDestroy(this);
+        getLifecycle().onDestroy(this);
     }
 }

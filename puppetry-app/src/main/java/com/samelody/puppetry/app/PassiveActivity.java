@@ -21,10 +21,10 @@ import android.support.v7.app.AppCompatActivity;
 
 import com.samelody.puppetry.Contract.PassiveView;
 import com.samelody.puppetry.Contract.Presenter;
+import com.samelody.puppetry.Controller;
 import com.samelody.puppetry.PresenterDelegate;
 import com.samelody.puppetry.lifecycle.ActivityLifecycle;
 import com.samelody.puppetry.lifecycle.LifecycleManager;
-import com.samelody.puppetry.lifecycle.LifecycleController;
 
 /**
  * The passive activity.
@@ -34,7 +34,7 @@ import com.samelody.puppetry.lifecycle.LifecycleController;
  */
 public abstract class PassiveActivity<P extends Presenter>
         extends AppCompatActivity
-        implements PassiveView, LifecycleController<ActivityLifecycle, P> {
+        implements PassiveView, Controller<P> {
 
     /**
      * The presenter delegate.
@@ -46,65 +46,73 @@ public abstract class PassiveActivity<P extends Presenter>
      */
     private ActivityLifecycle lifecycle;
 
-    @Override
-    public ActivityLifecycle getLifecycle() {
+    /**
+     * Gets the lifecycle of this activity.
+     *
+     * @return The lifecycle of this activity.
+     */
+    private ActivityLifecycle getLifecycle() {
         if (lifecycle == null) {
             lifecycle = LifecycleManager.getInstance().createActivityLifecycle();
         }
         return lifecycle;
     }
 
-    @Override
-    public void setLifecycle(ActivityLifecycle lifecycle) {
+    /**
+     * Sets the lifecycle of this activity.
+     *
+     * @param lifecycle The lifecycle of this activity.
+     */
+    protected void setLifecycle(ActivityLifecycle lifecycle) {
         this.lifecycle = lifecycle;
     }
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        getLifecycle().onActivityCreate(this, savedInstanceState);
+        getLifecycle().onCreate(this, savedInstanceState);
         delegate.onViewCreate(this, savedInstanceState);
     }
 
     @Override
     protected void onStart() {
         super.onStart();
-        getLifecycle().onActivityStart(this);
+        getLifecycle().onStart(this);
         delegate.onViewStart(this, getRouter());
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        getLifecycle().onActivityResume(this);
+        getLifecycle().onResume(this);
         delegate.onViewResume(true);
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-        getLifecycle().onActivityPause(this);
+        getLifecycle().onPause(this);
         delegate.onViewPause();
     }
 
     @Override
     protected void onStop() {
         super.onStop();
-        getLifecycle().onActivityStop(this);
+        getLifecycle().onStop(this);
         delegate.onViewStop();
     }
 
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-        getLifecycle().onActivityStateSave(this, outState);
+        getLifecycle().onSaveState(this, outState);
         delegate.onSaveState(outState);
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        getLifecycle().onActivityDestroy(this);
+        getLifecycle().onDestroy(this);
         delegate.onViewDestroy(this);
     }
 
