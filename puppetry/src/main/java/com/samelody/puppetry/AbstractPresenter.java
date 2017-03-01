@@ -14,11 +14,7 @@
  * limitations under the License.
 */
 
-package com.samelody.puppetry.core;
-
-import com.samelody.puppetry.core.Contract.PassiveView;
-import com.samelody.puppetry.core.Contract.PresentationModel;
-import com.samelody.puppetry.core.Contract.Router;
+package com.samelody.puppetry;
 
 /**
  * This class provides a skeletal implementation of the {@link Contract.Presenter}.
@@ -29,7 +25,7 @@ import com.samelody.puppetry.core.Contract.Router;
  * @param <M> The type of the presentation model.
  */
 public abstract class AbstractPresenter
-        <V extends PassiveView, M extends PresentationModel, R extends Router>
+        <V extends Contract.PassiveView, M extends Contract.PresentationModel, R extends Contract.Router>
         implements Contract.Presenter {
 
     /**
@@ -48,7 +44,7 @@ public abstract class AbstractPresenter
     private R router;
 
     @SuppressWarnings("unchecked")
-    void attachView(PassiveView view, Router router) {
+    void attachView(Contract.PassiveView view, Contract.Router router) {
         try {
             this.view = (V) view;
         } catch (ClassCastException e) {
@@ -61,7 +57,7 @@ public abstract class AbstractPresenter
         }
     }
 
-    void reattachView(PassiveView view, Router router) {
+    void reattachView(Contract.PassiveView view, Contract.Router router) {
         attachView(view, router);
     }
 

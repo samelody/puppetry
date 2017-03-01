@@ -15,7 +15,7 @@
 */
 package com.samelody.puppetry.sample.module.main;
 
-import com.samelody.puppetry.core.Model;
+import com.samelody.puppetry.Model;
 
 /**
  * @author Belin Wu

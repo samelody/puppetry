@@ -1,5 +1,5 @@
 <manifest
-    package="com.samelody.puppetry.core"
+    package="com.samelody.puppetry"
     >
     <application />
 </manifest>

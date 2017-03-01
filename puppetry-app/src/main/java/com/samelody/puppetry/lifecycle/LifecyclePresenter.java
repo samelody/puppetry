@@ -17,10 +17,10 @@ package com.samelody.puppetry.lifecycle;
 
 import android.support.annotation.CallSuper;
 
-import com.samelody.puppetry.core.AbstractPresenter;
-import com.samelody.puppetry.core.Contract.PassiveView;
-import com.samelody.puppetry.core.Contract.PresentationModel;
-import com.samelody.puppetry.core.Contract.Router;
+import com.samelody.puppetry.AbstractPresenter;
+import com.samelody.puppetry.Contract.PassiveView;
+import com.samelody.puppetry.Contract.PresentationModel;
+import com.samelody.puppetry.Contract.Router;
 
 /**
  * @author Belin Wu

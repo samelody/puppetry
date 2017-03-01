@@ -15,8 +15,8 @@
 */
 package com.samelody.puppetry.lifecycle;
 
-import com.samelody.puppetry.core.Contract;
-import com.samelody.puppetry.core.Controller;
+import com.samelody.puppetry.Contract;
+import com.samelody.puppetry.Controller;
 
 /**
  * @author Belin Wu

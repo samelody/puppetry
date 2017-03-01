@@ -19,9 +19,9 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 
-import com.samelody.puppetry.core.Contract.PassiveView;
-import com.samelody.puppetry.core.Contract.Presenter;
-import com.samelody.puppetry.core.PresenterDelegate;
+import com.samelody.puppetry.Contract.PassiveView;
+import com.samelody.puppetry.Contract.Presenter;
+import com.samelody.puppetry.PresenterDelegate;
 import com.samelody.puppetry.lifecycle.ActivityLifecycle;
 import com.samelody.puppetry.lifecycle.LifecycleManager;
 import com.samelody.puppetry.lifecycle.LifecycleController;

@@ -14,15 +14,15 @@
  * limitations under the License.
 */
 
-package com.samelody.puppetry.core;
+package com.samelody.puppetry;
 
 import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 
-import com.samelody.puppetry.core.Contract.PassiveView;
-import com.samelody.puppetry.core.Contract.Presenter;
-import com.samelody.puppetry.core.Contract.Router;
+import com.samelody.puppetry.Contract.PassiveView;
+import com.samelody.puppetry.Contract.Presenter;
+import com.samelody.puppetry.Contract.Router;
 
 import static java.lang.System.currentTimeMillis;
 

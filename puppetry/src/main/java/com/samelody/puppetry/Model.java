@@ -14,9 +14,9 @@
  * limitations under the License.
 */
 
-package com.samelody.puppetry.core;
+package com.samelody.puppetry;
 
-import com.samelody.puppetry.core.Contract.PresentationModel;
+import com.samelody.puppetry.Contract.PresentationModel;
 
 import static java.lang.System.currentTimeMillis;
 

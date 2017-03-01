@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2016-present Samelody.com
+ * Copyright (c) 2017-present Samelody.com
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,50 +13,37 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
 */
+package com.samelody.puppetry;
 
-package com.samelody.puppetry.core;
+import com.samelody.puppetry.Contract.Presenter;
+import com.samelody.puppetry.Contract.Router;
 
 /**
- *
+ * Represents the controller of Android views.
  *
  * @author Belin Wu
+ * @param <P> The type of the presenter.
  */
-public interface Contract {
+public interface Controller<P extends Presenter> {
 
     /**
-     * The passive view.
+     * Gets the router.
      *
-     * @author Belin Wu
+     * @return The created router.
      */
-    interface PassiveView {
-    }
+    Router getRouter();
 
     /**
-     * The presenter.
+     * Creates the presenter.
      *
-     * @author Belin Wu
+     * @return The created presenter.
      */
-    interface Presenter {
-    }
+    P createPresenter();
 
     /**
-     * The presentation model.
+     * Gets the presenter.
      *
-     * @author Belin Wu
+     * @return The presenter.
      */
-    interface PresentationModel {
-
-        /**
-         * Gets the unique id of this model.
-         *
-         * @return The unique id.
-         */
-        long getId();
-    }
-
-    /**
-     * @author Belin Wu
-     */
-    interface Router {
-    }
+    P getPresenter();
 }

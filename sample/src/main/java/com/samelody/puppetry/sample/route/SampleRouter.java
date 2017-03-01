@@ -15,7 +15,7 @@
 */
 package com.samelody.puppetry.sample.route;
 
-import com.samelody.puppetry.core.Contract;
+import com.samelody.puppetry.Contract;
 
 /**
  * @author Belin Wu

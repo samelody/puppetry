@@ -21,7 +21,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
-import com.samelody.puppetry.core.Contract;
+import com.samelody.puppetry.Contract;
 import com.samelody.puppetry.app.PassiveActivity;
 import com.samelody.puppetry.sample.R;
 import com.samelody.puppetry.sample.module.main.MainContract.Presenter;

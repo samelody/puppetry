@@ -13,26 +13,24 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
 */
-package com.samelody.puppetry.core;
+package com.samelody.puppetry;
 
-class PresenterWrapper {
-    private AbstractPresenter presenter;
-    private boolean fresh;
+import com.samelody.puppetry.Contract.PassiveView;
+import com.samelody.puppetry.Contract.PresentationModel;
+import com.samelody.puppetry.Contract.Router;
 
-    PresenterWrapper(AbstractPresenter presenter, boolean fresh) {
-        this.presenter = presenter;
-        this.fresh = fresh;
+/**
+ * @author Belin Wu
+ */
+public final class VoidPresenter
+        extends AbstractPresenter<PassiveView, PresentationModel, Router> {
+
+    private static final VoidPresenter INSTANCE = new VoidPresenter();
+
+    private VoidPresenter() {
     }
 
-    void setPresenter(AbstractPresenter presenter) {
-        this.presenter = presenter;
-    }
-
-    AbstractPresenter getPresenter() {
-        return presenter;
-    }
-
-    boolean isFresh() {
-        return fresh;
+    public static VoidPresenter getInstance() {
+        return INSTANCE;
     }
 }
