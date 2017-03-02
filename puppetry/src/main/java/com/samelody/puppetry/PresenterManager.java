@@ -17,9 +17,12 @@ package com.samelody.puppetry;
 
 import android.support.v4.util.ArrayMap;
 
+import com.samelody.puppetry.Contract.Presenter;
+
 import java.util.Map;
 
 import static com.samelody.puppetry.Model.VOID_MODEL;
+import static com.samelody.stathod.util.Objects.requireNonNull;
 
 /**
  *
@@ -34,7 +37,7 @@ class PresenterManager {
     /**
      * The managed presenters.
      */
-    private Map<String, Contract.Presenter> presenters = new ArrayMap<>();
+    private Map<String, Presenter> presenters = new ArrayMap<>();
 
     /**
      * Gets the singleton instance.
@@ -55,23 +58,23 @@ class PresenterManager {
     }
 
     @SuppressWarnings("unchecked")
-    <P extends Contract.Presenter> PresenterWrapper getPresenter(String id, Controller<P> factory) {
-        P p = (P) presenters.get(id);
-        if (p != null) {
-            return new PresenterWrapper((AbstractPresenter) p, false);
+    <P extends Presenter> AbstractPresenter getPresenter(String id, Controller<P> controller) {
+        AbstractPresenter presenter = (AbstractPresenter) presenters.get(id);
+        if (presenter != null) {
+            presenter.setFresh(false);
+            return presenter;
         }
-        p = factory.createPresenter();
-        if (p == null) {
-            p = (P) VoidPresenter.getInstance();
-        }
+        P p = controller.createPresenter();
+        requireNonNull(p, "the presenter must not be null");
         if (!(p instanceof AbstractPresenter)) {
-            throw new IllegalStateException("Your presenter must be a AbstractPresenter.");
+            throw new IllegalStateException("the presenter is not a AbstractPresenter");
         }
-        AbstractPresenter presenter = (AbstractPresenter) p;
+        presenter = (AbstractPresenter) p;
         if (presenter.getModel() == null) {
             presenter.setModel(VOID_MODEL);
         }
+        presenter.setFresh(true);
         presenters.put(id, presenter);
-        return new PresenterWrapper(presenter, true);
+        return presenter;
     }
 }

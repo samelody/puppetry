@@ -15,6 +15,7 @@
 */
 package com.samelody.puppetry;
 
+import com.samelody.puppetry.Contract.PassiveView;
 import com.samelody.puppetry.Contract.Presenter;
 import com.samelody.puppetry.Contract.Router;
 
@@ -24,7 +25,7 @@ import com.samelody.puppetry.Contract.Router;
  * @author Belin Wu
  * @param <P> The type of the presenter.
  */
-public interface Controller<P extends Presenter> {
+public interface Controller<P extends Presenter> extends PassiveView {
 
     /**
      * Gets the router.

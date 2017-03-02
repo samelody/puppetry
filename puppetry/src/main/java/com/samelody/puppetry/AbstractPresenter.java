@@ -16,22 +16,25 @@
 
 package com.samelody.puppetry;
 
+import com.samelody.puppetry.Contract.PassiveView;
+import com.samelody.puppetry.Contract.Presenter;
+import com.samelody.puppetry.Contract.Router;
+
+import java.lang.reflect.ParameterizedType;
+import java.lang.reflect.Type;
+
 /**
- * This class provides a skeletal implementation of the {@link Contract.Presenter}.
+ * This class provides a skeletal implementation of the {@link Presenter}.
  *
  * @author Belin Wu
  *
  * @param <V> The type of the passive view.
  * @param <M> The type of the presentation model.
  */
+@SuppressWarnings("unchecked")
 public abstract class AbstractPresenter
-        <V extends Contract.PassiveView, M extends Contract.PresentationModel, R extends Contract.Router>
-        implements Contract.Presenter {
-
-    /**
-     * The passive view.
-     */
-    private V view;
+        <V extends PassiveView, M extends Model, R extends Router>
+        implements Presenter {
 
     /**
      * The presentation model.
@@ -39,31 +42,64 @@ public abstract class AbstractPresenter
     private M model;
 
     /**
-     * The router.
+     * The target proxy of view.
      */
-    private R router;
+    private TargetProxy<V> viewProxy = new TargetProxy<>();
+
+    /**
+     * The target proxy of router.
+     */
+    private TargetProxy<R> routerProxy = new TargetProxy<>();
+
+    /**
+     * The class of model.
+     */
+    private Class<M> modelClass;
+
+    /**
+     *
+     */
+    private boolean fresh;
+
+    {
+        ParameterizedType superClass = (ParameterizedType) getClass().getGenericSuperclass();
+        Type[] typeArgs = superClass.getActualTypeArguments();
+        viewProxy.setTargetInterface((Class<V>) typeArgs[0]);
+        modelClass = (Class<M>) typeArgs[1];
+        routerProxy.setTargetInterface((Class<R>) typeArgs[2]);
+    }
+
+    void createModel() {
+        try {
+            model = modelClass.newInstance();
+        } catch (InstantiationException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        }
+    }
 
     @SuppressWarnings("unchecked")
-    void attachView(Contract.PassiveView view, Contract.Router router) {
+    void attachView(PassiveView view, Router router) {
         try {
-            this.view = (V) view;
+            viewProxy.setTarget((V) view);
         } catch (ClassCastException e) {
             throw new IllegalStateException(e);
         }
         try {
-            this.router = (R) router;
+            routerProxy.setTarget((R) router);
         } catch (ClassCastException e) {
             throw new IllegalStateException(e);
         }
     }
 
-    void reattachView(Contract.PassiveView view, Contract.Router router) {
+    void reattachView(PassiveView view, Router router) {
         attachView(view, router);
     }
 
     void detachView() {
-        this.view = null;
-        this.router = null;
+        viewProxy.setTarget(null);
+        routerProxy.setTarget(null);
     }
 
     /**
@@ -87,9 +123,9 @@ public abstract class AbstractPresenter
     /**
      * Resume the presenter.
      *
-     * @param isVisibleToUser
+     * @param visible
      */
-    void resume(boolean isVisibleToUser) {
+    void resume(boolean visible) {
         onResume();
     }
 
@@ -128,7 +164,7 @@ public abstract class AbstractPresenter
      * @return The passive view.
      */
     protected V getView() {
-        return view;
+        return viewProxy.getTarget();
     }
 
     /**
@@ -137,7 +173,7 @@ public abstract class AbstractPresenter
      * @return The router.
      */
     protected R getRouter() {
-        return router;
+        return routerProxy.getTarget();
     }
 
     /**
@@ -156,5 +192,13 @@ public abstract class AbstractPresenter
      */
     protected M getModel() {
         return model;
+    }
+
+    void setFresh(boolean fresh) {
+        this.fresh = fresh;
+    }
+
+    public boolean isFresh() {
+        return fresh;
     }
 }

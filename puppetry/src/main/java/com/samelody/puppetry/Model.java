@@ -16,16 +16,14 @@
 
 package com.samelody.puppetry;
 
-import com.samelody.puppetry.Contract.PresentationModel;
-
 import static java.lang.System.currentTimeMillis;
 
 /**
- * This class provides a skeletal implementation of the {@link PresentationModel}.
+ * This presentation model.
  *
  * @author Belin Wu
  */
-public class Model implements PresentationModel {
+public class Model {
 
     public static final Model VOID_MODEL = new Model();
 
@@ -34,7 +32,6 @@ public class Model implements PresentationModel {
      */
     private long id = currentTimeMillis();
 
-    @Override
     public long getId() {
         return id;
     }

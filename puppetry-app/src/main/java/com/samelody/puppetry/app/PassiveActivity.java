@@ -19,12 +19,13 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 
-import com.samelody.puppetry.Contract.PassiveView;
 import com.samelody.puppetry.Contract.Presenter;
 import com.samelody.puppetry.Controller;
 import com.samelody.puppetry.PresenterDelegate;
 import com.samelody.puppetry.lifecycle.ActivityLifecycle;
 import com.samelody.puppetry.lifecycle.LifecycleManager;
+
+import static com.samelody.puppetry.Puppetry.newPresenterDelegate;
 
 /**
  * The passive activity.
@@ -34,12 +35,12 @@ import com.samelody.puppetry.lifecycle.LifecycleManager;
  */
 public abstract class PassiveActivity<P extends Presenter>
         extends AppCompatActivity
-        implements PassiveView, Controller<P> {
+        implements Controller<P> {
 
     /**
      * The presenter delegate.
      */
-    private PresenterDelegate<P> delegate = new PresenterDelegate<>();
+    private PresenterDelegate<P> delegate = newPresenterDelegate(this);
 
     /**
      * The lifecycle of this activity.

@@ -19,8 +19,8 @@ import android.support.annotation.CallSuper;
 
 import com.samelody.puppetry.AbstractPresenter;
 import com.samelody.puppetry.Contract.PassiveView;
-import com.samelody.puppetry.Contract.PresentationModel;
 import com.samelody.puppetry.Contract.Router;
+import com.samelody.puppetry.Model;
 
 /**
  * The base presenter class with lifecycle.
@@ -28,7 +28,7 @@ import com.samelody.puppetry.Contract.Router;
  * @author Belin Wu
  */
 public abstract class LifecyclePresenter
-        <V extends PassiveView, M extends PresentationModel, R extends Router>
+        <V extends PassiveView, M extends Model, R extends Router>
         extends AbstractPresenter<V, M, R> {
 
     /**

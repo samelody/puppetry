@@ -21,12 +21,13 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
 import android.view.View;
 
-import com.samelody.puppetry.Contract.PassiveView;
 import com.samelody.puppetry.Contract.Presenter;
 import com.samelody.puppetry.Controller;
 import com.samelody.puppetry.PresenterDelegate;
 import com.samelody.puppetry.lifecycle.FragmentLifecycle;
 import com.samelody.puppetry.lifecycle.LifecycleManager;
+
+import static com.samelody.puppetry.Puppetry.newPresenterDelegate;
 
 /**
  * The passive fragment.
@@ -35,12 +36,12 @@ import com.samelody.puppetry.lifecycle.LifecycleManager;
  */
 public abstract class PassiveFragment<P extends Presenter>
         extends DialogFragment
-        implements PassiveView, Controller<P> {
+        implements Controller<P> {
 
     /**
      * The presenter delegate.
      */
-    private PresenterDelegate<P> delegate = new PresenterDelegate<>();
+    private PresenterDelegate<P> delegate = newPresenterDelegate(this);
 
     /**
      * The lifecycle of this fragment.

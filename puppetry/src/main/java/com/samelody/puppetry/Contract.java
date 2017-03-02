@@ -40,21 +40,6 @@ public interface Contract {
     }
 
     /**
-     * The presentation model.
-     *
-     * @author Belin Wu
-     */
-    interface PresentationModel {
-
-        /**
-         * Gets the unique id of this model.
-         *
-         * @return The unique id.
-         */
-        long getId();
-    }
-
-    /**
      * @author Belin Wu
      */
     interface Router {
