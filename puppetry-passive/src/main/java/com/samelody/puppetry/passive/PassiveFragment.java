@@ -14,18 +14,18 @@
  * limitations under the License.
 */
 
-package com.samelody.puppetry.app;
+package com.samelody.puppetry.passive;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
 import android.view.View;
 
+import com.samelody.puppetry.lifecycle.LifecycleManager;
 import com.samelody.puppetry.Contract.Presenter;
 import com.samelody.puppetry.Controller;
 import com.samelody.puppetry.PresenterDelegate;
 import com.samelody.puppetry.lifecycle.FragmentLifecycle;
-import com.samelody.puppetry.lifecycle.LifecycleManager;
 
 import static com.samelody.puppetry.Puppetry.newPresenterDelegate;
 

@@ -1,5 +1,5 @@
 <manifest
-    package="com.samelody.puppetry.sample"
+    package="com.samelody.sample.puppetry"
     xmlns:android="http://schemas.android.com/apk/res/android"
     >
     <application
@@ -7,11 +7,11 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:name=".Sample"
+        android:name="com.samelody.sample.puppetry.Sample"
         android:theme="@style/AppTheme"
         >
         <activity
-            android:name=".module.main.MainActivity"
+            android:name="com.samelody.sample.puppetry.feature.main.MainActivity"
             >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

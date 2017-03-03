@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
 */
-package com.samelody.puppetry.sample;
+package com.samelody.sample.puppetry;
 
 import android.app.Application;
 
@@ -22,8 +22,8 @@ import com.samelody.puppetry.lifecycle.FragmentLifecycle;
 import com.samelody.puppetry.lifecycle.LifecycleFactory;
 import com.samelody.puppetry.lifecycle.LifecycleManager;
 import com.samelody.puppetry.lifecycle.PresenterLifecycle;
-import com.samelody.puppetry.sample.lifecycle.SampleActivityLifecycle;
-import com.samelody.puppetry.sample.lifecycle.SamplePresenterLifecycle;
+import com.samelody.sample.puppetry.lifecycle.SampleActivityLifecycle;
+import com.samelody.sample.puppetry.lifecycle.SamplePresenterLifecycle;
 import com.samelody.stathod.Stathod;
 import com.squareup.leakcanary.LeakCanary;
 import com.squareup.leakcanary.RefWatcher;

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2016-present Samelody.com
+ * Copyright (c) 2017-present Samelody.com
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,12 +13,19 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
 */
-package com.samelody.puppetry.sample.module.main;
+package com.samelody.sample.puppetry.route;
 
-import com.samelody.puppetry.Model;
+import android.app.Activity;
 
-/**
- * @author Belin Wu
- */
-public class MainModel extends Model {
+public class SampleRouterImpl implements SampleRouter {
+    private Activity activity;
+
+    public SampleRouterImpl(Activity activity) {
+        this.activity = activity;
+    }
+
+    @Override
+    public void exit() {
+        activity.finish();
+    }
 }

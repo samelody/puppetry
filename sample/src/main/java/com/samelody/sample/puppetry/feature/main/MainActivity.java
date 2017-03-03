@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
 */
-package com.samelody.puppetry.sample.module.main;
+package com.samelody.sample.puppetry.feature.main;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -21,11 +21,11 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.samelody.puppetry.passive.PassiveActivity;
 import com.samelody.puppetry.Contract;
-import com.samelody.puppetry.app.PassiveActivity;
-import com.samelody.puppetry.sample.R;
-import com.samelody.puppetry.sample.module.main.MainContract.Presenter;
-import com.samelody.puppetry.sample.route.SampleRouterImpl;
+import com.samelody.sample.puppetry.R;
+import com.samelody.sample.puppetry.feature.main.MainContract.Presenter;
+import com.samelody.sample.puppetry.route.SampleRouterImpl;
 import com.samelody.stathod.Stathod;
 
 public class MainActivity

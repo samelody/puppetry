@@ -1,1 +1,1 @@
-include ':sample', ':puppetry', ':puppetry-app'
+include ':sample', ':puppetry-core', ':puppetry-passive'

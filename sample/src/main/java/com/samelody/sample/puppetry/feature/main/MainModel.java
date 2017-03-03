@@ -13,13 +13,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
 */
-package com.samelody.puppetry.sample.route;
+package com.samelody.sample.puppetry.feature.main;
 
-import com.samelody.puppetry.Contract;
+import com.samelody.puppetry.Model;
 
 /**
  * @author Belin Wu
  */
-public interface SampleRouter extends Contract.Router {
-    void exit();
+public class MainModel extends Model {
 }

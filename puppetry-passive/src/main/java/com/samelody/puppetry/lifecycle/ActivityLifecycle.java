@@ -17,23 +17,24 @@ package com.samelody.puppetry.lifecycle;
 
 import android.os.Bundle;
 
-import com.samelody.puppetry.app.PassiveFragment;
+import com.samelody.puppetry.passive.PassiveActivity;
 
 /**
  * @author Belin Wu
  */
-public class FragmentLifecycle {
-    public void onCreate(PassiveFragment fragment, Bundle state) {}
+public class ActivityLifecycle {
 
-    public void onStart(PassiveFragment fragment) {}
+    public void onCreate(PassiveActivity activity, Bundle state) {}
 
-    public void onResume(PassiveFragment fragment, boolean visible) {}
+    public void onStart(PassiveActivity activity) {}
 
-    public void onPause(PassiveFragment fragment) {}
+    public void onResume(PassiveActivity activity) {}
 
-    public void onStop(PassiveFragment fragment) {}
+    public void onPause(PassiveActivity activity) {}
 
-    public void onSaveState(PassiveFragment fragment, Bundle state) {}
+    public void onStop(PassiveActivity activity) {}
 
-    public void onDestroy(PassiveFragment fragment) {}
+    public void onSaveState(PassiveActivity activity, Bundle state) {}
+
+    public void onDestroy(PassiveActivity activity) {}
 }

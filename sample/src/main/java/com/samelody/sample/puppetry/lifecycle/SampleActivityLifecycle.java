@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2016-present Samelody.com
+ * Copyright (c) 2017-present Samelody.com
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,23 +13,21 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
 */
-package com.samelody.puppetry.sample.module.main;
+package com.samelody.sample.puppetry.lifecycle;
 
-import com.samelody.puppetry.Contract;
+import android.os.Bundle;
+
+import com.samelody.puppetry.passive.PassiveActivity;
+import com.samelody.puppetry.lifecycle.ActivityLifecycle;
+
+import timber.log.Timber;
 
 /**
  * @author Belin Wu
  */
-public interface MainContract {
-
-    interface PassiveView extends Contract.PassiveView {
-        void setHiClickable(boolean clickable);
-        void toastHi();
-    }
-
-    interface Presenter extends Contract.Presenter {
-        void onHiClick();
-
-        void onExitClick();
+public class SampleActivityLifecycle extends ActivityLifecycle {
+    @Override
+    public void onCreate(PassiveActivity activity, Bundle state) {
+        Timber.d("onCreate");
     }
 }
