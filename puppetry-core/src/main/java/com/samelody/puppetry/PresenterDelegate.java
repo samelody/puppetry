@@ -15,9 +15,7 @@
 */
 package com.samelody.puppetry;
 
-import android.app.Activity;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 
 import com.samelody.puppetry.Contract.PassiveView;
 import com.samelody.puppetry.Contract.Presenter;
@@ -31,21 +29,21 @@ public interface PresenterDelegate<P extends Presenter> {
 
     void onViewCreate(Controller<P> controller, Bundle state);
 
-    <V extends PassiveView, R extends Contract.Router> void onViewStart(V view, R router);
+    void onViewDestroy(PassiveView view);
 
-    void onViewStop();
+    void attachView(Controller<P> controller, boolean visible);
+
+    void detachView();
 
     void onSaveState(Bundle state);
 
-    void onViewResume(boolean isVisibleToUser);
+    void onViewStart();
+
+    void onViewResume(boolean visible);
 
     void onViewPause();
 
-    void onViewDestroy(Fragment fragment);
-
-    void onViewDestroy(Activity activity);
-
-    void setUserVisibleHint(boolean isVisibleToUser);
+    void onViewStop();
 
     /**
      * Creates the presenter and presentation model.

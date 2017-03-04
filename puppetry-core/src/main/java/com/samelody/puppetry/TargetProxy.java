@@ -22,7 +22,7 @@ import static com.samelody.puppetry.Puppetry.newProxy;
  *
  * @author Belin Wu
  */
-class TargetProxy<T> {
+public class TargetProxy<T> {
 
     /**
      * The target

@@ -19,11 +19,11 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 
-import com.samelody.puppetry.lifecycle.ActivityLifecycle;
-import com.samelody.puppetry.lifecycle.LifecycleManager;
 import com.samelody.puppetry.Contract.Presenter;
 import com.samelody.puppetry.Controller;
 import com.samelody.puppetry.PresenterDelegate;
+import com.samelody.puppetry.lifecycle.ActivityLifecycle;
+import com.samelody.puppetry.lifecycle.LifecycleManager;
 
 import static com.samelody.puppetry.Puppetry.newPresenterDelegate;
 
@@ -79,7 +79,8 @@ public abstract class PassiveActivity<P extends Presenter>
     protected void onStart() {
         super.onStart();
         getLifecycle().onStart(this);
-        delegate.onViewStart(this, getRouter());
+        delegate.attachView(this, true);
+        delegate.onViewStart();
     }
 
     @Override
@@ -100,6 +101,7 @@ public abstract class PassiveActivity<P extends Presenter>
     protected void onStop() {
         super.onStop();
         getLifecycle().onStop(this);
+        delegate.detachView();
         delegate.onViewStop();
     }
 

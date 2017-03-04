@@ -61,6 +61,26 @@ public abstract class AbstractPresenter
      */
     private boolean fresh;
 
+    /**
+     *
+     */
+    private boolean viewDetached = true;
+
+    /**
+     *
+     */
+    private boolean viewRecreated;
+
+    /**
+     *
+     */
+    private boolean detachViewCalled;
+
+    /**
+     *
+     */
+    private boolean stateRendered;
+
     {
         ParameterizedType superClass = (ParameterizedType) getClass().getGenericSuperclass();
         Type[] typeArgs = superClass.getActualTypeArguments();
@@ -79,8 +99,18 @@ public abstract class AbstractPresenter
         }
     }
 
+    /**
+     * Attaches the view.
+     *
+     * @param view The view
+     * @param router The router
+     * @param visible true if the view is visible to user, false otherwise.
+     */
     @SuppressWarnings("unchecked")
-    void attachView(PassiveView view, Router router) {
+    void attachView(PassiveView view, Router router, boolean visible) {
+        if (!viewDetached) {
+            return;
+        }
         try {
             viewProxy.setTarget((V) view);
         } catch (ClassCastException e) {
@@ -91,25 +121,57 @@ public abstract class AbstractPresenter
         } catch (ClassCastException e) {
             throw new IllegalStateException(e);
         }
-    }
-
-    void reattachView(PassiveView view, Router router) {
-        attachView(view, router);
-    }
-
-    void detachView() {
-        viewProxy.setTarget(null);
-        routerProxy.setTarget(null);
+        viewDetached = false;
+        viewRecreated = false;
+        onViewAttach(detachViewCalled, visible);
     }
 
     /**
-     * Create the presenter.
+     * Called when the view is attached.
+     *
+     * @param reattach true if the view is reattached, false otherwise.
+     * @param visible true if the view is visible to user, false otherwise.
+     */
+    protected void onViewAttach(boolean reattach, boolean visible) {
+    }
+
+    /**
+     * Detaches the view.
+     */
+    void detachView() {
+        viewDetached = true;
+        detachViewCalled = true;
+        viewProxy.setTarget(null);
+        routerProxy.setTarget(null);
+        onViewDetach();
+    }
+
+    /**
+     * Called when the view is detached.
+     */
+    protected void onViewDetach() {
+    }
+
+    /**
+     * Creates the presenter.
      */
     void create() {
-        onCreate();
+        viewRecreated = !isFresh();
+        if (isFresh()) {
+            onCreate();
+        }
     }
 
     protected void onCreate() {}
+
+    /**
+     * Destroy the presenter.
+     */
+    void destroy() {
+        onDestroy();
+    }
+
+    protected void onDestroy() {}
 
     /**
      * Start the presenter.
@@ -123,7 +185,7 @@ public abstract class AbstractPresenter
     /**
      * Resume the presenter.
      *
-     * @param visible
+     * @param visible true if the view is visible to user, false otherwise.
      */
     void resume(boolean visible) {
         onResume();
@@ -148,15 +210,6 @@ public abstract class AbstractPresenter
     }
 
     protected void onStop() {}
-
-    /**
-     * Destroy the presenter.
-     */
-    void destroy() {
-        onDestroy();
-    }
-
-    protected void onDestroy() {}
 
     /**
      * Gets the passive view.
@@ -192,6 +245,15 @@ public abstract class AbstractPresenter
      */
     protected M getModel() {
         return model;
+    }
+
+    /**
+     * Check if the view is detached or not.
+     *
+     * @return true if the view is detached, false otherwise.
+     */
+    protected boolean isViewDetached() {
+        return viewDetached;
     }
 
     void setFresh(boolean fresh) {

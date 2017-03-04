@@ -22,7 +22,6 @@ import android.support.v4.app.Fragment;
 
 import com.samelody.puppetry.Contract.PassiveView;
 import com.samelody.puppetry.Contract.Presenter;
-import com.samelody.puppetry.Contract.Router;
 
 import static java.lang.System.currentTimeMillis;
 
@@ -49,11 +48,6 @@ class PresenterDelegateImpl<P extends Presenter> implements PresenterDelegate<P>
     private AbstractPresenter presenter;
 
     /**
-     * The controller.
-     */
-    private Controller<P> controller;
-
-    /**
      * The target proxy of presenter.
      */
     private TargetProxy<P> presenterProxy = new TargetProxy<>();
@@ -71,8 +65,8 @@ class PresenterDelegateImpl<P extends Presenter> implements PresenterDelegate<P>
         presenterProxy.setTargetInterface(presenterInterface);
     }
 
+    @Override
     public void onViewCreate(Controller<P> controller, Bundle state) {
-        this.controller = controller;
         if (state == null) {
             presenterId = PRESENTER_ID_PREFIX + currentTimeMillis();
         }
@@ -83,32 +77,58 @@ class PresenterDelegateImpl<P extends Presenter> implements PresenterDelegate<P>
         presenter = PresenterManager.getInstance().getPresenter(presenterId, controller);
         presenterProxy.setTarget((P) presenter);
         presenterRemoved = false;
-        if (presenter.isFresh()) {
-            presenter.create();
-        }
+        presenter.create();
     }
 
-    public <V extends PassiveView, R extends Router> void onViewStart(V view, R router) {
+    @Override
+    public void attachView(Controller<P> controller, boolean visible) {
         if (presenterRemoved) {
             return;
         }
-        if (presenter.isFresh()) {
-            presenter.attachView(view, router);
+        presenter.attachView(controller, controller.getRouter(), visible);
+    }
+
+    @Override
+    public void detachView() {
+        if (presenterRemoved) {
+            return;
         }
-        else {
-            presenter.reattachView(view, router);
+        presenter.detachView();
+    }
+
+    @Override
+    public void onViewStart() {
+        if (presenterRemoved) {
+            return;
         }
         presenter.start();
     }
 
+    @Override
+    public void onViewResume(boolean visible) {
+        if (presenterRemoved) {
+            return;
+        }
+        presenter.resume(visible);
+    }
+
+    @Override
+    public void onViewPause() {
+        if (presenterRemoved) {
+            return;
+        }
+        presenter.pause();
+    }
+
+    @Override
     public void onViewStop() {
         if (presenterRemoved) {
             return;
         }
         presenter.stop();
-        presenter.detachView();
     }
 
+    @Override
     public void onSaveState(Bundle state) {
         if (presenterRemoved) {
             return;
@@ -117,44 +137,27 @@ class PresenterDelegateImpl<P extends Presenter> implements PresenterDelegate<P>
         saveStateCalled = true;
     }
 
-    public void onViewResume(boolean isVisibleToUser) {
+    @Override
+    public void onViewDestroy(PassiveView view) {
         if (presenterRemoved) {
             return;
         }
-        presenter.resume(isVisibleToUser);
-    }
-
-    public void onViewPause() {
-        if (presenterRemoved) {
+        if (view instanceof Fragment) {
+            Fragment fragment = (Fragment) view;
+            if (fragment.getActivity().isFinishing()) {
+                removePresenter();
+                return;
+            }
+            if (fragment.isRemoving() && !saveStateCalled) {
+                removePresenter();
+            }
             return;
         }
-        presenter.pause();
-    }
-
-    public void onViewDestroy(Fragment fragment) {
-        if (presenterRemoved) {
-            return;
-        }
-        if (fragment.getActivity().isFinishing()) {
-            removePresenter();
-        }
-        else if (fragment.isRemoving() && !saveStateCalled) {
-            removePresenter();
-        }
-    }
-
-    public void onViewDestroy(Activity activity) {
-        if (presenterRemoved) {
-            return;
-        }
-        if (activity.isFinishing()) {
-            removePresenter();
-        }
-    }
-
-    public void setUserVisibleHint(boolean isVisibleToUser) {
-        if (presenterRemoved) {
-            return;
+        if (view instanceof Activity) {
+            Activity activity = (Activity) view;
+            if (activity.isFinishing()) {
+                removePresenter();
+            }
         }
     }
 
@@ -180,9 +183,9 @@ class PresenterDelegateImpl<P extends Presenter> implements PresenterDelegate<P>
      *
      * @return The presenter.
      */
-    @SuppressWarnings("unchecked")
+    @Override
     public P getPresenter() {
-        return (P) presenterProxy.getTarget();
+        return presenterProxy.getTarget();
     }
 
     /**
