@@ -1,6 +1,6 @@
 # Puppetry
 
-[![JitPack](https://jitpack.io/v/com.github.samelody/puppetry.svg)](https://jitpack.io/#com.github.samelody/puppetry)
+[![JitPack](https://jitpack.io/v/samelody/puppetry.svg)](https://jitpack.io/#samelody/puppetry)
 ![Android](https://img.shields.io/badge/platform-Android-brightgreen.svg)
 [![Apache](https://img.shields.io/hexpm/l/plug.svg)](LICENSE)
 ![API](https://img.shields.io/badge/API-14%2B-brightgreen.svg)
@@ -28,9 +28,9 @@ In your app `build.gradle`:
 
 ```gradle
 dependencies {
-    compile 'com.github.samelody:puppetry-core:0.1.0'
+    compile 'com.github.samelody.puppetry:puppetry-core:0.1.0'
     // or
-    // compile 'com.github.samelody:puppetry-passive:0.1.0'
+    // compile 'com.github.samelody.puppetry:puppetry-passive:0.1.0'
 }
 ```
 
